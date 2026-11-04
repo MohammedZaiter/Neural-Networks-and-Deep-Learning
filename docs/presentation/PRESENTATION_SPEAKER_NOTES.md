@@ -21,7 +21,7 @@
 19. **Q&A** — Credit Roboflow CC BY 4.0 and instructor lecture concepts.
 
 ## Essential last-minute checklist
-- Fill every placeholder; insert actual `artifacts/*.png` in PowerPoint.
+- Fill every placeholder; insert actual `results/figures/*.png` in PowerPoint.
 - Update results in report; report must match notebook values.
 - If a class is absent in any split, fix dataset/version instead of suppressing the error.
 - Save final executed `.ipynb` showing charts, learning curves and metrics.

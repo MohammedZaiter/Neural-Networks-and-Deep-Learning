@@ -435,8 +435,7 @@ __pycache__/
 venv/
 project-venv/
 
-## Dataset (download via Roboflow, see README)
+## Dataset (download via Roboflow, see data/README.md); only the README is tracked
 Construction-Site-Safety-27/
-
-## Project run outputs (models, metrics, plots) are tracked
-!artifacts/
+data/*
+!data/README.md

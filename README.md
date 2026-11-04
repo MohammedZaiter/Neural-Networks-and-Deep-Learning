@@ -6,12 +6,35 @@ SafeSight classifies cropped regions from construction-site images into PPE clas
 
 ## Repository layout
 
-| Path | Contents |
-|------|----------|
-| `SafeSight_PPE_Deep_Learning.ipynb` | End-to-end experiment notebook (data loading, cropping, training, evaluation) |
-| `requirements.txt` | Python dependencies |
-| `artifacts/` | Run outputs: trained `.keras` models, metrics (CSV/JSON), plots |
-| `docs/` | Project report (DOCX), presentation (PPTX), speaker notes |
+```
+├── SafeSight_PPE_Deep_Learning.ipynb   main deliverable: the full, documented experiment
+├── requirements.txt
+├── data/                               dataset location (not committed, see data/README.md)
+├── models/
+│   ├── final_ppe_classifier.keras      chosen model (fine-tuned MobileNetV2)
+│   └── checkpoints/                    best checkpoint of every experiment (01_mlp … 06_transfer_finetuned)
+├── results/
+│   ├── figures/                        confusion matrix, learning curves, error gallery, dataset plots
+│   └── tables/                         validation results, hyperparameter search, test metrics, manifests
+└── docs/
+    ├── report/                         project report (DOCX)
+    └── presentation/                   slides (PPTX) and speaker notes
+```
+
+## Notebook structure
+
+The notebook follows the project specification, section by section. Every stage has a rationale, the code, and observations on the output.
+
+| Section | Contents |
+|---|---|
+| 1. Dataset selection | Source, licence, size, features, target |
+| 2. Data preprocessing | Annotation audit (missing values), outlier rule, exploration, leakage check, normalization, augmentation, class weights |
+| 3. Step-by-step model creation | MLP → CNN (ReLU) → CNN (ELU + dropout + L2) |
+| 4. Hyperparameter tuning | Seeded random search over 7 hyperparameters |
+| 5. Transfer learning | MobileNetV2: frozen backbone, then partial fine-tuning |
+| 6. Integration of course topics | Map of course concepts to where they are used |
+| 7. Evaluation and interpretation | Model comparison, held-out test, learning curves, error analysis, challenges |
+| 8. Conclusion | Answer to the research question, gains per stage, limitations |
 
 ## Results
 
@@ -32,22 +55,23 @@ Held-out test set, chosen model `06_transfer_finetuned` (269 crops):
 |---------:|---------:|--------------:|--------------:|
 | 0.914 | 0.909 | 0.920 | 0.924 |
 
-The test set was not used for tuning. See `artifacts/` for the confusion matrix, learning curves, and an error gallery.
+The test set was not used for tuning. The random search did not beat the hand-designed CNN within its 9-epoch, 6-trial budget; section 4 of the notebook explains why. See `results/figures/` for the confusion matrix, learning curves and error gallery.
 
 ## Dataset
 
 [Construction Site Safety v27](https://universe.roboflow.com/roboflow-universe-projects/construction-site-safety/dataset/27) (YOLOv8 export, 2,801 augmented images, 10 classes), by Roboflow Universe Projects, licensed **CC BY 4.0**.
 
-The dataset is **not committed** to this repository. The notebook downloads it automatically.
+The dataset is **not committed** to this repository. See [data/README.md](data/README.md) for how to obtain it.
 
 ## Reproducing
 
 1. Install the dependencies: `pip install -r requirements.txt` (or open the notebook in Google Colab with a GPU).
-2. Provide the dataset in one of two ways:
-   - Set the `ROBOFLOW_API_KEY` environment variable (or a Colab secret of the same name), **or**
-   - Set `LOCAL_DATASET_DIR` to an extracted YOLOv8 export of the dataset.
-3. Run all cells. Outputs are written to `artifacts/`.
+2. Provide the dataset in one of three ways:
+   - Set the `ROBOFLOW_API_KEY` environment variable (or a Colab secret of the same name); the notebook downloads into `data/`.
+   - Extract a YOLOv8 export to `data/Construction-Site-Safety-27/`.
+   - Set `LOCAL_DATASET_DIR` to any extracted YOLOv8 export.
+3. Run all cells. Models are written to `models/`, plots and tables to `results/`.
 
 Never commit API keys or put them in notebooks, slides, or screenshots.
 
-Key configuration (`artifacts/configuration.json`): image size 160, batch size 32, 15 scratch epochs, 9 search epochs, 15 transfer epochs and 8 fine-tune epochs.
+Key configuration (`results/tables/configuration.json`): image size 160, batch size 32, 15 scratch epochs, 9 search epochs, 15 transfer epochs and 8 fine-tune epochs.
