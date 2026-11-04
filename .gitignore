@@ -426,3 +426,17 @@ FodyWeavers.xsd
 
 # Official VS Code C# Dev Kit Extension exclusion
 #*.lscache
+
+## Python / Jupyter
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+project-venv/
+
+## Dataset (download via Roboflow, see README)
+Construction-Site-Safety-27/
+
+## Project run outputs (models, metrics, plots) are tracked
+!artifacts/

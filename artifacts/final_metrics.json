@@ -1,0 +1,8 @@
+{
+  "chosen_model": "06_transfer_finetuned",
+  "test_accuracy": 0.9144981412639405,
+  "test_macro_f1": 0.9090691050906964,
+  "test_balanced_accuracy": 0.920411504444524,
+  "test_unsafe_recall": 0.9243170622480967,
+  "number_test_crops": 269
+}

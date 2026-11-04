@@ -1,0 +1,13 @@
+{
+  "workspace": "roboflow-universe-projects",
+  "project": "construction-site-safety",
+  "version": 27,
+  "image_size": 160,
+  "crop_padding": 0.1,
+  "min_box_pixels": 12,
+  "batch_size": 32,
+  "scratch_epochs": 15,
+  "search_epochs": 9,
+  "transfer_epochs": 15,
+  "fine_tune_epochs": 8
+}
