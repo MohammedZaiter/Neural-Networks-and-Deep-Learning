@@ -1,7 +1,5 @@
 # SafeSight — PPE Compliance Classification with Deep Learning
 
-MLAI 504 (Neural Networks and Deep Learning) course project.
-
 SafeSight classifies cropped regions from construction-site images into PPE classes (e.g. `Hardhat` vs `NO-Hardhat`, `Safety Vest` vs `NO-Safety Vest`). It compares models of increasing capacity, from an MLP baseline through CNNs and a random hyperparameter search to transfer learning.
 
 > **Scope:** this is a **crop / region classifier**. It relies on the dataset's annotated bounding boxes. It does not do full-scene detection or associate people with their gear, so mAP is not the main metric here.
