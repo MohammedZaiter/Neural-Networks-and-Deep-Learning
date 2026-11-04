@@ -105,7 +105,17 @@ The dataset is **not committed** to this repository. See [data/README.md](data/R
    - Set the `ROBOFLOW_API_KEY` environment variable (or a Colab secret of the same name); the notebook downloads into `data/`.
    - Extract a YOLOv8 export to `data/Construction-Site-Safety-27/`.
    - Set `LOCAL_DATASET_DIR` to any extracted YOLOv8 export.
-3. Run all cells. Models are written to `models/`, plots and tables to `results/`.
+3. Run all cells. By default (`RETRAIN = False` in the setup cell) the notebook **loads the trained checkpoints** from `models/checkpoints/` instead of training. A full "Run all" then takes about 2 minutes on CPU and reproduces every validation and test metric exactly. Set `RETRAIN = True` to train all models from scratch (about 7 h on CPU). Models are written to `models/`, plots and tables to `results/`.
+
+Use **Python 3.12** for local runs. TensorFlow 2.16–2.19, pinned in `requirements.txt`, does not install on Python 3.13 or newer:
+
+```powershell
+py -V:3.12 -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt ipykernel
+```
+
+Then select the `.venv` kernel in VS Code / Jupyter.
 
 Never commit API keys or put them in notebooks, slides, or screenshots.
 
