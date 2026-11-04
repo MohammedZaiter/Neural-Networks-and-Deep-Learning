@@ -33,7 +33,7 @@ data/Construction-Site-Safety-27/
 
 | Item | Value |
 |---|---|
-| Exported images | 2,801 (2,605 train / 114 valid / 82 test), augmented export of a 717-image source project |
+| Exported images | 2,799 (2,603 train / 114 valid / 82 test; Roboflow's page lists 2,801), augmented export of a 717-image source project |
 | Annotation format | YOLO boxes: `class_id cx cy width height` (normalized) |
 | Source classes | 10: Hardhat, Mask, NO-Hardhat, NO-Mask, NO-Safety Vest, Person, Safety Cone, Safety Vest, machinery, vehicle |
 | Classes used | 4: Hardhat, NO-Hardhat, Safety Vest, NO-Safety Vest |

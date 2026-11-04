@@ -94,7 +94,7 @@ Colab provides a free GPU, which should cut the training time from hours to minu
 
 ## Dataset
 
-[Construction Site Safety v27](https://universe.roboflow.com/roboflow-universe-projects/construction-site-safety/dataset/27) (YOLOv8 export, 2,801 augmented images, 10 classes), by Roboflow Universe Projects, licensed **CC BY 4.0**.
+[Construction Site Safety v27](https://universe.roboflow.com/roboflow-universe-projects/construction-site-safety/dataset/27) (YOLOv8 export, 2,799 augmented images, 10 classes), by Roboflow Universe Projects, licensed **CC BY 4.0**.
 
 The dataset is **not committed** to this repository. See [data/README.md](data/README.md) for how to obtain it.
 
