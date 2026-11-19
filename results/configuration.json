@@ -7,7 +7,6 @@
   "min_box_pixels": 12,
   "batch_size": 32,
   "scratch_epochs": 15,
-  "search_epochs": 9,
   "transfer_epochs": 15,
   "fine_tune_epochs": 8
 }

@@ -9,14 +9,14 @@ The images are not committed to this repository (about 150 MB). Only this README
 
 Pick one:
 
-1. **Automatic download.** Set the `ROBOFLOW_API_KEY` environment variable (or a Colab secret with the same name) and run the notebook. It downloads the YOLOv8 export into `data/Construction-Site-Safety-27/`.
+1. **Automatic download.** Set the `ROBOFLOW_API_KEY` environment variable (or a Colab secret with the same name) and run `Notebooks/SafeSight_PPE_Deep_Learning.ipynb`. It downloads the YOLOv8 export into `data/Construction-Site-Safety-27/` (into `/content/data/` on Colab).
 2. **Manual download.** Export version 27 in **YOLOv8** format from the link above and extract it here, so this path exists:
 
    ```
    data/Construction-Site-Safety-27/data.yaml
    ```
 
-   The notebook uses this folder automatically when it exists.
+   The notebook uses this folder automatically when it exists. It also saves a crop cache here (`crops_v27_*.npy`, about 0.9 GB, not committed).
 3. **Another location.** Set `LOCAL_DATASET_DIR` to any folder that contains `data.yaml`.
 
 ## Expected layout
