@@ -48,7 +48,7 @@ FIGS = RESULTS / 'figures'             # plots
 
 # Roboflow API key used to download the dataset when it is not in DATA_DIR. An environment variable or a
 # Colab secret named ROBOFLOW_API_KEY takes priority over this value.
-ROBOFLOW_API_KEY = 'rf_nNt129Th3GhJM5OKn1tyH4sLPGK2'
+ROBOFLOW_API_KEY = 'oTB4qUL7b7lJbwYvpg79'
 
 TARGET = ['Hardhat', 'NO-Hardhat', 'Safety Vest', 'NO-Safety Vest']
 UNSAFE = (1, 3)                        # NO-Hardhat, NO-Safety Vest
