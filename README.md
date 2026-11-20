@@ -61,7 +61,7 @@ The test set was not used for tuning. These results will be updated with the con
 
 | Item | Source | Where it ends up |
 |---|---|---|
-| **Dataset** | Downloaded from Roboflow Universe with the `roboflow` Python package (YOLOv8 export, about 150 MB). Uses the Roboflow key in `Notebooks/utils.py`, or a `ROBOFLOW_API_KEY` environment variable / Colab secret. | `data/Construction-Site-Safety-27/` (gitignored); `/content/data/` on Colab |
+| **Dataset** | Downloaded from Roboflow Universe with the `roboflow` Python package (YOLOv8 export, about 150 MB). Needs a Roboflow private API key in a `ROBOFLOW_API_KEY` Colab secret or environment variable. | `data/Construction-Site-Safety-27/` (gitignored); `/content/data/` on Colab |
 | **Pretrained weights** | ImageNet weights for MobileNetV2 (`mobilenet_v2_weights_tf_dim_ordering_tf_kernels_1.0_160_no_top.h5`, 9.4 MB), downloaded automatically by `keras.applications` on first use | Keras cache: `~/.keras/models/` |
 | **Trained models** | Trained by the notebook; nothing else is downloaded | `Checkpoints/<name>.keras` (best epoch of each experiment), `Checkpoints/final_ppe_classifier.keras` (chosen model) |
 | **Results** | Written by the notebook | `results/`, `results/figures/` |
@@ -81,7 +81,7 @@ The first run also included a 6-trial random search (3.8 h), later replaced by t
 
 1. Open the notebook in [Google Colab](https://colab.research.google.com/): **File → Open notebook → GitHub**, paste this repository's URL, choose the branch `ai-style-experiments` and `Notebooks/SafeSight_PPE_Deep_Learning.ipynb`.
 2. **Runtime → Change runtime type → T4 GPU**.
-3. The dataset is downloaded with the Roboflow key set in `Notebooks/utils.py` (`ROBOFLOW_API_KEY`). To use another key, add a Colab secret named `ROBOFLOW_API_KEY`; it takes priority.
+3. Add a Colab secret (🔑 in the left sidebar) named `ROBOFLOW_API_KEY` with your Roboflow **private** API key (not the publishable `rf_…` key) and turn on notebook access. The dataset is downloaded with it.
 4. **Runtime → Run all.** Section 0 mounts Google Drive and clones the repository into `My Drive/Neural-Networks-and-Deep-Learning` on the first run, then moves into its `Notebooks/` folder. Saved checkpoints are loaded instead of retrained, and every new checkpoint and result is written to Drive. The dataset is downloaded to the local Colab disk (`/content/data`).
 5. If a session disconnects, run all again: with `RETRAIN = False`, experiments that already have a checkpoint are loaded and only the missing ones are trained.
 6. The results stay in `My Drive/Neural-Networks-and-Deep-Learning` (`Checkpoints/` and `results/`). Copy those two folders back into the local repository.

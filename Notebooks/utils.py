@@ -46,10 +46,6 @@ CKPT = Path('../Checkpoints')          # best checkpoint of every experiment + t
 RESULTS = Path('../results')           # CSV / JSON results
 FIGS = RESULTS / 'figures'             # plots
 
-# Roboflow API key used to download the dataset when it is not in DATA_DIR. An environment variable or a
-# Colab secret named ROBOFLOW_API_KEY takes priority over this value.
-ROBOFLOW_API_KEY = 'oTB4qUL7b7lJbwYvpg79'
-
 TARGET = ['Hardhat', 'NO-Hardhat', 'Safety Vest', 'NO-Safety Vest']
 UNSAFE = (1, 3)                        # NO-Hardhat, NO-Safety Vest
 
@@ -123,10 +119,9 @@ def find_dataset():
             except Exception:
                 pass
         if not key:
-            key = ROBOFLOW_API_KEY  # project key, used when no environment variable or Colab secret is set
-        if not key:
-            raise RuntimeError('Set ROBOFLOW_API_KEY (env/Colab secret), place the YOLOv8 export in '
-                               f'{default}, or set LOCAL_DATASET_DIR.')
+            raise RuntimeError('No Roboflow key found. Add a Colab secret (or environment variable) named '
+                               'ROBOFLOW_API_KEY with your Roboflow *private* API key, place the YOLOv8 export '
+                               f'in {default}, or set LOCAL_DATASET_DIR.')
         from roboflow import Roboflow
         version = Roboflow(api_key=key).workspace(CONFIG['workspace']).project(CONFIG['project']).version(CONFIG['version'])
         data = Path(version.download('yolov8', location=str(default)).location).resolve()
