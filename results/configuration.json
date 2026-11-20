@@ -8,5 +8,10 @@
   "batch_size": 32,
   "scratch_epochs": 15,
   "transfer_epochs": 15,
-  "fine_tune_epochs": 8
+  "fine_tune_epochs": 8,
+  "ablation_epochs": 15,
+  "long_epochs": 30,
+  "best_cnn_epochs": 30,
+  "tl_compare_epochs": 10,
+  "small_fraction": 0.1
 }

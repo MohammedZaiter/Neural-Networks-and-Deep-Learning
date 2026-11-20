@@ -1,0 +1,22 @@
+{
+  "changes": [
+    "4 conv blocks",
+    "Flatten instead of global avg pooling",
+    "30 epochs, no early stopping",
+    "No dropout"
+  ],
+  "model": {
+    "blocks": 4,
+    "head": "flatten",
+    "dropout": 0.0
+  },
+  "train": {
+    "lr": 0.001,
+    "optimizer": "adam",
+    "batch": 32,
+    "schedule": "plateau",
+    "class_weights": true,
+    "loss": "ce",
+    "early_stopping": false
+  }
+}

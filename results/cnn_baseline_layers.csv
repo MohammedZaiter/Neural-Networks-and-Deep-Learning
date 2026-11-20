@@ -1,0 +1,16 @@
+layer,type,output_shape,parameters
+conv2d,Conv2D,160 x 160 x 24,672
+batch_normalization,BatchNormalization,160 x 160 x 24,96
+activation,Activation,160 x 160 x 24,0
+max_pooling2d,MaxPooling2D,80 x 80 x 24,0
+conv2d_1,Conv2D,80 x 80 x 48,10416
+batch_normalization_1,BatchNormalization,80 x 80 x 48,192
+activation_1,Activation,80 x 80 x 48,0
+max_pooling2d_1,MaxPooling2D,40 x 40 x 48,0
+conv2d_2,Conv2D,40 x 40 x 96,41568
+batch_normalization_2,BatchNormalization,40 x 40 x 96,384
+activation_2,Activation,40 x 40 x 96,0
+max_pooling2d_2,MaxPooling2D,20 x 20 x 96,0
+global_average_pooling2d,GlobalAveragePooling2D,96,0
+dropout_1,Dropout,96,0
+dense_2,Dense,4,388

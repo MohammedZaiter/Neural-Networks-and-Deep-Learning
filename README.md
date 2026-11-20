@@ -11,7 +11,7 @@ SafeSight classifies cropped regions from construction-site images into 4 PPE cl
 ├── Notebooks/
 │   ├── SafeSight_PPE_Deep_Learning.ipynb   the project: sections 1-8 of the specification + demo appendix
 │   └── utils.py                            code used by the notebook: data, models, training, metrics, plots
-├── Presentation/                  slides (PPTX) and speaker notes
+├── Presentation/                  slides (PPTX)
 ├── Report/                        project report (DOCX)
 ├── data/                          dataset location (not committed, see data/README.md)
 ├── results/                       CSV / JSON results of every experiment
@@ -46,8 +46,10 @@ Validation set (model selection by macro-F1):
 | 01 MLP baseline | 0.573 | 0.568 | 0.592 | 0.574 |
 | 02 CNN (ReLU) | 0.702 | 0.696 | 0.710 | 0.778 |
 | 03 CNN (ELU + dropout) | 0.694 | 0.689 | 0.709 | 0.692 |
+| 07 Best CNN (4 blocks, Flatten head, no dropout, 30 epochs) | 0.886 | 0.882 | 0.888 | 0.884 |
 | 05 Transfer learning (frozen) | 0.855 | 0.849 | 0.859 | 0.846 |
-| **06 Transfer learning (fine-tuned)** | **0.898** | **0.896** | **0.900** | **0.907** |
+| **06 Transfer learning (fine-tune last 30 layers)** | **0.898** | **0.896** | **0.900** | **0.907** |
+| 08 Transfer learning (fine-tune all layers) | 0.878 | 0.870 | 0.871 | 0.875 |
 
 Held-out test set, chosen model `06_transfer_finetuned` (269 crops):
 
@@ -55,7 +57,18 @@ Held-out test set, chosen model `06_transfer_finetuned` (269 crops):
 |---------:|---------:|--------------:|--------------:|
 | 0.914 | 0.909 | 0.920 | 0.924 |
 
-The test set was not used for tuning. These results will be updated with the controlled experiments (section 4) and the transfer comparison (section 5) after the GPU run.
+The test set was not used for tuning.
+
+**Controlled experiments (section 4).** The baseline CNN trained with 3 seeds gives 0.666–0.751 macro-F1 (mean 0.714); a change counts only outside that range. 4 of 27 changes beat it: 4 conv blocks (+0.118), Flatten instead of global average pooling (+0.087), 30 epochs without early stopping (+0.052) and no dropout (+0.040). 5 are worse, the largest being Adam with lr 0.01 (−0.171) and 2 conv blocks (−0.157). Combined, they give `07_cnn_best` (0.882). Details: `results/ablation_results.csv`, `results/best_cnn_config.json`.
+
+**Transfer comparison (section 5)**, 10 epochs per setup, validation macro-F1:
+
+| Setup | 10% of the data | 100% of the data |
+|---|---:|---:|
+| CNN from scratch (best recipe) | 0.485 | 0.819 |
+| MobileNetV2 frozen | 0.745 | 0.826 |
+| Fine-tune last 30 layers | 0.797 | **0.868** |
+| Fine-tune all layers | 0.808 | 0.814 |
 
 ## Where the data, weights and models come from
 
@@ -74,6 +87,12 @@ Experiments 01–06 come from **a first run on a local machine** (Windows, CPU o
 |---|---|---:|
 | Step-by-step models | 01 MLP, 02 CNN (ReLU), 03 CNN (ELU) | 2.1 h |
 | Transfer learning | 05 frozen, 06 fine-tuned | 0.8 h |
+
+| Stage (Colab T4) | Experiments | Training time (GPU) |
+|---|---|---:|
+| Controlled experiments and grid search | `abl_*`, `grid_*` | 2.1 h |
+| Combined best CNN and full fine-tuning | `07_cnn_best`, `08_transfer_finetune_all` | 0.25 h |
+| Transfer comparison (10% and 100%) | `tl_*` | 0.2 h |
 
 The first run also included a 6-trial random search (3.8 h), later replaced by the controlled experiments of section 4.
 
